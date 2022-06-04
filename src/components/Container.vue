@@ -2,15 +2,20 @@
   <el-container>
         <el-header>头部</el-header>
         <el-container>
-            <el-Aside>左侧导航栏</el-Aside>
+            <el-Aside>
+              <NavMenu></NavMenu>
+            </el-Aside>
             <el-main>展示区</el-main>
         </el-container>
   </el-container>
 </template>
 
 <script>
+import NavMenu from './NavMenu.vue'
+
 export default {
-    name:'Container'
+    name:'Container',
+    components:{ NavMenu }
 }
 </script>
 

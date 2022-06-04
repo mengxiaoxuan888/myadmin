@@ -4,46 +4,21 @@
             <el-radio-button :label="false">展开</el-radio-button>
             <el-radio-button :label="true">收起</el-radio-button>
         </el-radio-group>
-        <el-menu class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-            <el-menu-item>
+        <el-menu default-active="zhuye" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+            <el-menu-item index="zhuye">
                 <span slot="title">主页</span>
             </el-menu-item>
-            <el-submenu index="1">
+            <el-submenu :index="item.id" v-for="(item,index) in items" :key="index">
                 <template slot="title">
                     <i class="el-icon-location"></i>
-                    <span slot="title">一级菜单A</span>
+                    <span slot="title">{{item.name}}</span>
                 </template>
-                <el-menu-item-group>
-                    <el-menu-item index="1-1">二级菜单A</el-menu-item>
-                    <el-menu-item index="1-2">二级菜单B</el-menu-item>
-                    <el-menu-item index="1-3">二级菜单C</el-menu-item>
-                </el-menu-item-group>
-                <el-submenu index="1-4">
-                    <span slot="title">二级菜单D</span>
-                    <el-menu-item index="1-4-1">三级菜单A</el-menu-item>
+                <el-submenu :index="sub.id" v-for="(sub,index) in item.subitem" :key="index">
+                    <span slot="title">{{sub.name}}</span>
+                    <el-menu-item :index="sun.id" v-for="(sun,index) in sub.subitem" :key="index">
+                        {{sun.name}}
+                    </el-menu-item>
                 </el-submenu>
-                <el-submenu index="1-5">
-                    <span slot="title">二级菜单E</span>
-                    <el-menu-item index="1-5-1">三级菜单A</el-menu-item>
-                </el-submenu>
-            </el-submenu>
-            <el-submenu index="2">          
-                <template slot="title">
-                    <i class="el-icon-menu"></i>
-                    <span slot="title">一级菜单B</span>
-                </template>              
-            </el-submenu>
-            <el-submenu index="3">          
-                <template slot="title">
-                    <i class="el-icon-document"></i>
-                    <span slot="title">一级菜单C</span>
-                </template>              
-            </el-submenu>
-            <el-submenu index="4">          
-                <template slot="title">
-                    <i class="el-icon-setting"></i>
-                    <span slot="title">一级菜单D</span>
-                </template>              
             </el-submenu>
         </el-menu>
     </div>
@@ -54,7 +29,83 @@ export default {
     name:'NavMenu',
     data() {
       return {
-        isCollapse: false
+        isCollapse: false,
+        items:[
+            {
+                name:"一级菜单A",
+                id:"1",
+                subitem:[
+                    {
+                        name:"二级菜单A",
+                        id:"1-1",
+                        subitem:[
+                            {
+                                name:"三级菜单A",
+                                id:"1-1-1"
+                            },
+                            {
+                                name:"三级菜单B",
+                                id:"1-1-2"
+                            }
+                        ]
+                    },
+                    {
+                        name:"二级菜单B",
+                        id:"1-2",
+                        subitem:[
+                            {
+                                name:"三级菜单A",
+                                id:"1-2-1"
+                            },
+                            {
+                                name:"三级菜单B",
+                                id:"1-2-2"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name:"一级菜单B",
+                id:"2",
+                subitem:[
+                    {
+                        name:"二级菜单A",
+                        id:"2-1",
+                        subitem:[
+                            {
+                                name:"三级菜单A",
+                                id:"2-1-1"
+                            },
+                            {
+                                name:"三级菜单B",
+                                id:"2-1-2"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                name:"一级菜单C",
+                id:"3",
+                subitem:[
+                    {
+                        name:"二级菜单A",
+                        id:"3-1",
+                        subitem:[
+                            {
+                                name:"三级菜单A",
+                                id:"3-1-1"
+                            },
+                            {
+                                name:"三级菜单B",
+                                id:"3-1-2"
+                            }
+                        ]
+                    }
+                ]
+            },
+        ]
       };
     },
     methods: {
